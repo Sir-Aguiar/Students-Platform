@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mainContainer {
+  @apply bg-indigo-800 h-full flex items-center justify-center;
+}
+.registerForm {
+  @apply h-[80%] w-[65%] xlg:h-[95%] lg:w-[95%] shadow-register-shadow rounded-md flex flex-col;
+}
+
+.HinputField {
+  @apply flex flex-row my-2;
+}
+
+.VinputField {
+  @apply flex flex-col;
+}
+
+.fieldInput {
+  @apply border-b-[2px] border-indigo-700 rounded-sm p-1 px-2 text-lg m-1 bg-transparent shadow-sm w-full focus:border-pink-400 transition-colors outline-none;
+}
+
+.submiter {
+  @apply border-none cursor-pointer text-slate-200 bg-indigo-600 p-2 w-[80%] max-h-11 h-11 text-[1.1rem] rounded-full hover:brightness-90 transition-all font-Roboto;
+}
+.formLink {
+  @apply text-blue-700 hover:brightness-75 my-2;
+}
+
+.topSide h1::after {
+  content: "";
+  display: block;
+  position: relative;
+  left: 50%;
+  margin: 5px 0;
+  transform: translateX(-50%);
+  height: 2px;
+  width: 210px;
+  border-radius: 5px;
+  background-image: linear-gradient(90deg, #533cbb, #3a21a5, #533cbb);
+}
+.topSide h1::before {
+  content: "";
+  display: block;
+  position: relative;
+  left: 50%;
+  margin: 5px 0;
+  transform: translateX(-50%);
+  height: 2px;
+  width: 160px;
+  border-radius: 5px;
+  background-image: linear-gradient(90deg, #533cbb, #3a21a5, #533cbb);
+}
