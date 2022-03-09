@@ -22,8 +22,9 @@
 }
 
 .submiter {
-  @apply border-none cursor-pointer text-slate-200 bg-indigo-600 p-2 w-[80%] max-h-11 h-11 text-[1.1rem] rounded-full hover:brightness-90 transition-all font-Roboto;
+  @apply border-none cursor-pointer text-slate-200 bg-indigo-600 p-2 w-[80%] max-h-11 h-11 text-[1.1rem] rounded-full hover:brightness-90 transition-all font-Roboto relative overflow-hidden;
 }
+
 .formLink {
   @apply text-blue-700 hover:brightness-75 my-2;
 }
@@ -51,4 +52,58 @@
   width: 160px;
   border-radius: 5px;
   background-image: linear-gradient(90deg, #533cbb, #3a21a5, #533cbb);
+}
+.selector {
+  @apply border-[1px] mx-1 border-neutral-500 bg-slate-200  outline-none rounded-sm;
+}
+
+.social {
+  @apply border-2 flex flex-row my-2 p-1 items-center;
+}
+
+.social span {
+  box-shadow: 2px 2px 4px #37373769, -2px 2px 4px #37373769;
+
+  @apply hover:scale-[1.1] mx-4 bg-slate-300 rounded-md p-2 cursor-pointer  hover:translate-y-2 relative transition-all duration-[400ms] relative overflow-hidden;
+}
+.social span:hover svg {
+  fill: rgb(203 213 225);
+}
+.social span::before {
+  content: "";
+  position: absolute;
+  width: 130%;
+  height: 115%;
+  background: linear-gradient(
+    0deg,
+    rgba(208, 39, 190, 1) 0%,
+    rgba(166, 12, 185, 1) 50%,
+    rgba(188, 66, 235, 1) 100%
+  );
+  transform: rotate(45deg);
+  left: -110%;
+  top: 90%;
+  z-index: -1;
+}
+.social span:hover::before {
+  animation: fadein 0.5s 1 ease-in;
+  top: -10%;
+  left: -10%;
+}
+@keyframes fadein {
+  0% {
+    left: -110%;
+    top: 90%;
+  }
+  50% {
+    left: 10%;
+    top: -30%;
+  }
+  100% {
+    left: -10%;
+    top: -10%;
+  }
+}
+.social svg {
+  @apply w-[22px] h-[22px] fill-indigo-600;
 }
