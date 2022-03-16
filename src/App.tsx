@@ -1,21 +1,40 @@
 import { FormEvent, useEffect, useState } from "react";
 import "./App.css";
-import {
-  BsInstagram,
-  BsFillShareFill,
-  BsLinkedin,
-  BsTwitter,
-} from "react-icons/bs";
+import { BsInstagram, BsFillShareFill, BsLinkedin, BsTwitter } from "react-icons/bs";
 import { baseApi } from "./scripts/baseApi";
+import { handleSubmit } from "./scripts/handleSubmit";
+export type userInfos = {
+  name: string;
+  password: string;
+  login: string;
+  email: string;
+  _class: string;
+};
 const App = () => {
   const [turmas, setTurmas] = useState<string[]>([]);
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const [pickedClass, setClass] = useState<string>('');
+  const [userName, setUserName] = useState<string>('');
+  const [userEmail, setUserEmail] = useState<string>('');
+  const [userPassword, setUserPassword] = useState<string>('');
+  const [userFullName, setUserFullName] = useState<string>('');
+  const userInfos:userInfos = {
+    name: userFullName,
+    password: userPassword,
+    login: userName,
+    email: userEmail,
+    _class: pickedClass,
   };
+  useEffect(() => {
+    baseApi.get("/getclasses").then((res) => {
+      if (res.status == 200) {
+        setTurmas(res.data.classes);
+      }
+    });
+  }, []);
+
   return (
     <div className="mainContainer">
-      <form className="registerForm" onSubmit={(e) => handleSubmit(e)}>
+      <form className="registerForm" onSubmit={(e) => handleSubmit(e, userInfos)}>
         <div className="topSide bg-[#eceded]">
           <h1 className="text-[26px] my-2 font-Plex text-center font-semibold text-slate-800">
             Facilite sua rotina escolar!
@@ -26,19 +45,31 @@ const App = () => {
           <div className="bg-[#eceded] p-1 rightSide flex-1 flex flex-col items-center">
             <div className="m-4">
               <div className="VinputField overflow-x-hidden">
-                <input
-                  type="text"
-                  id="nome"
-                  placeholder="Nome completo"
-                  required
-                  className="fieldInput"
-                />
+                <div className="HinputField">
+                  <input
+                    type="text"
+                    id="nome"
+                    placeholder="Nome completo"
+                    required
+                    className="fieldInput"
+                    onChange={(e) => setUserFullName(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    id="login"
+                    placeholder="Usuário"
+                    required
+                    className="fieldInput"
+                    onChange={(e) => setUserName(e.target.value)}
+                  />
+                </div>
                 <input
                   type="email"
                   id="email"
                   placeholder="Email"
                   className="fieldInput"
                   required
+                  onChange={(e) => setUserEmail(e.target.value)}
                 />
               </div>
               <div className="HinputField">
@@ -48,6 +79,7 @@ const App = () => {
                   placeholder="Senha"
                   required
                   className="flex-1 fieldInput"
+                  onChange={(e) => setUserPassword(e.target.value)}
                 />
                 <input
                   type="password"
@@ -58,15 +90,19 @@ const App = () => {
                 />
               </div>
               <div className="HinputField">
-                <select className="selector" required>
-                  <option>Escolha sua turma</option> {/* Remover */}
+                <label htmlFor="">Escolha sua turma</label>
+                <select className="selector" required onChange={(e) => setClass(e.target.value)}>
                   {turmas.map((turma) => (
-                    <option>{turma}</option>
+                    <option key={turma} value={turma}>
+                      {turma}
+                    </option>
                   ))}
                 </select>
               </div>
             </div>
-            <button className="submiter" type="submit">Solicitar Acesso</button>
+            <button className="submiter" type="submit">
+              Solicitar Acesso
+            </button>
             <a href="#" className="formLink">
               Como funcionam nossos serviços?
             </a>
