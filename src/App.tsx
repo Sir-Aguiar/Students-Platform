@@ -2,7 +2,6 @@ import { FormEvent, useEffect, useState } from "react";
 import "./App.css";
 import { BsInstagram, BsFillShareFill, BsLinkedin, BsTwitter } from "react-icons/bs";
 import { baseApi } from "./scripts/baseApi";
-import { handleSubmit } from "./scripts/handleSubmit";
 export type userInfos = {
   name: string;
   password: string;
@@ -32,7 +31,25 @@ const App = () => {
       }
     });
   }, []);
-
+  const handleSubmit = async (e: FormEvent, userInfos: userInfos) => {
+    e.preventDefault();
+    const resenha = document.querySelector("#re-senha") as HTMLInputElement;
+    if (resenha.value == userInfos.password) {
+      baseApi
+        .post("/new-student", userInfos)
+        .then((res) => {
+          if (res.status == 201) {
+            alert(res.data.message);
+          }
+        })
+        .catch((e) => {
+          const message = e.message;
+          if (message == "Request failed with status code 400") {
+            alert("Nome de usuário ou Email já em uso!");
+          }
+        });
+    }
+  };
   return (
     <div className="mainContainer">
       <form className="registerForm" onSubmit={(e) => handleSubmit(e, userInfos)}>
