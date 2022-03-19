@@ -10,11 +10,15 @@
   "dependencies": {
     "@types/react-icons": "^3.0.0",
     "axios": "^0.26.0",
+    "dotenv": "^16.0.0",
+    "firebase": "^9.6.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/firebase": "^3.2.1",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@vitejs/plugin-react": "^1.0.7",

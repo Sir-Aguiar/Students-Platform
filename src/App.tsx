@@ -12,18 +12,19 @@ export type userInfos = {
 };
 const App = () => {
   const [turmas, setTurmas] = useState<string[]>([]);
-  const [pickedClass, setClass] = useState<string>('');
-  const [userName, setUserName] = useState<string>('');
-  const [userEmail, setUserEmail] = useState<string>('');
-  const [userPassword, setUserPassword] = useState<string>('');
-  const [userFullName, setUserFullName] = useState<string>('');
-  const userInfos:userInfos = {
+  const [pickedClass, setClass] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [userPassword, setUserPassword] = useState<string>("");
+  const [userFullName, setUserFullName] = useState<string>("");
+  const userInfos: userInfos = {
     name: userFullName,
     password: userPassword,
     login: userName,
     email: userEmail,
     _class: pickedClass,
   };
+
   useEffect(() => {
     baseApi.get("/getclasses").then((res) => {
       if (res.status == 200) {
