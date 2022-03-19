@@ -9,13 +9,11 @@ export const handleSubmit = async (e: FormEvent, userInfos: userInfos) => {
     console.log(userInfos);
     baseApi.post("/new-student", userInfos).then((res) => {
       if (res.status == 400) {
-        alert(res.data.error)
+        alert(res.data.error);
       }
       if (res.status == 200) {
-        alert(res.data.message)
+        alert(res.data.message);
       }
-    });
-  } else {
-    alert("Confirme a senha corretamente");
+    })
   }
 };
